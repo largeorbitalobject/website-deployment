@@ -4,16 +4,36 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
     overflow: hidden;
     background: #000;
 }
 
 #fullscreenVideo {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -1;
+}
+
+/* Mobile portrait optimization */
+@media (max-aspect-ratio: 1/1) {
+    #fullscreenVideo {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Mobile landscape optimization */
+@media (max-height: 500px) {
+    #fullscreenVideo {
+        width: auto;
+        height: 100%;
+    }
 }
