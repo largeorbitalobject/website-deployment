@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Video Options</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .option {
+            margin-bottom: 40px;
+            border: 2px solid #333;
+            padding: 10px;
+        }
+        video {
+            width: 100%;
+            height: 300px;
+            background: #000;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose how video should display on mobile:</h1>
+    
+    <div class="option">
+        <h2>Option 1: Contain (Black Bars)</h2>
+        <video id="video1" autoplay muted loop playsinline style="object-fit: contain;">
+            <source src="assets/videos/construction.mp4" type="video/mp4">
+        </video>
+        <p>Shows full video with black bars on top/bottom</p>
+        <button onclick="applyStyle('contain')">Use This</button>
+    </div>
+    
+    <div class="option">
+        <h2>Option 2: Cover (Cropped)</h2>
+        <video id="video2" autoplay muted loop playsinline style="object-fit: cover;">
+            <source src="assets/videos/construction.mp4" type="video/mp4">
+        </video>
+        <p>Fills screen but crops the sides</p>
+        <button onclick="applyStyle('cover')">Use This</button>
+    </div>
+    
+    <div class="option">
+        <h2>Option 3: Fill (Stretched)</h2>
+        <video id="video3" autoplay muted loop playsinline style="object-fit: fill;">
+            <source src="assets/videos/construction.mp4" type="video/mp4">
+        </video>
+        <p>Stretches video to fill (may distort)</p>
+        <button onclick="applyStyle('fill')">Use This</button>
+    </div>
+    
+    <script>
+        function applyStyle(fit) {
+            alert(`You selected: ${fit}\n\nTo apply, update CSS with:\nobject-fit: ${fit};`);
+        }
+    </script>
+</body>
+</html>

@@ -4,36 +4,18 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    overflow: hidden;
+body {
+    margin: 0;
+    padding: 0;
     background: #000;
+    overflow: hidden;
 }
 
-#fullscreenVideo {
+#bgVideo {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-50%);
-    z-index: -1;
-}
-
-/* Mobile portrait optimization */
-@media (max-aspect-ratio: 1/1) {
-    #fullscreenVideo {
-        width: 100%;
-        height: auto;
-    }
-}
-
-/* Mobile landscape optimization */
-@media (max-height: 500px) {
-    #fullscreenVideo {
-        width: auto;
-        height: 100%;
-    }
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
 }

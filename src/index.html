@@ -2,13 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Site</title>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <video autoplay muted loop playsinline id="fullscreenVideo">
-        <source src="assets/videos/construction.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline id="bgVideo">
+        <!-- Source set by JavaScript -->
     </video>
+    <script>
+        // Detect mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Set video source
+        const video = document.getElementById('bgVideo');
+        const source = document.createElement('source');
+        source.type = 'video/mp4';
+        source.src = isMobile ? 'assets/videos/mobile-full-act.mp4' : 'assets/videos/construction.mp4';
+        video.appendChild(source);
+        
+        // Ensure autoplay
+        video.play().catch(() => {
+            document.addEventListener('click', () => video.play(), { once: true });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Debug</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #333;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border: 2px solid white;
+        }
+        .info {
+            margin: 20px 0;
+            padding: 10px;
+            background: #444;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Debug Test</h1>
+    
+    <div class="info">
+        <p>Video path: assets/videos/construction.mp4</p>
+        <p id="status">Loading...</p>
+    </div>
+    
+    <video id="testVideo" controls autoplay muted loop>
+        <source src="assets/videos/construction.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="info">
+        <h3>Video Events:</h3>
+        <div id="events"></div>
+    </div>
+    
+    <script>
+        const video = document.getElementById('testVideo');
+        const status = document.getElementById('status');
+        const events = document.getElementById('events');
+        
+        function logEvent(event) {
+            const time = new Date().toLocaleTimeString();
+            events.innerHTML += `<p>${time}: ${event}</p>`;
+        }
+        
+        video.addEventListener('loadstart', () => {
+            status.textContent = 'Starting to load...';
+            logEvent('loadstart');
+        });
+        
+        video.addEventListener('loadedmetadata', () => {
+            status.textContent = `Video loaded: ${video.videoWidth}x${video.videoHeight}`;
+            logEvent('loadedmetadata');
+        });
+        
+        video.addEventListener('canplay', () => {
+            status.textContent = 'Video can play';
+            logEvent('canplay');
+        });
+        
+        video.addEventListener('playing', () => {
+            status.textContent = 'Video is playing';
+            logEvent('playing');
+        });
+        
+        video.addEventListener('error', (e) => {
+            status.textContent = 'Error loading video!';
+            logEvent('ERROR: ' + (video.error?.message || 'Unknown error'));
+            console.error('Video error:', video.error);
+        });
+        
+        // Check if video is ready after page load
+        window.addEventListener('load', () => {
+            if (video.readyState >= 3) {
+                status.textContent = 'Video ready on page load';
+            }
+        });
+    </script>
+</body>
+</html>
